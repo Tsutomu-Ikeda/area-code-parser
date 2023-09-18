@@ -1,0 +1,7 @@
+requests
+camelot-py
+opencv-python
+ghostscript
+fastapi
+uvicorn
+python-multipart
