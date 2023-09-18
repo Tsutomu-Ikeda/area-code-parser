@@ -4,6 +4,49 @@
 
 [総務省が公開している全国の市外局番一覧](https://www.soumu.go.jp/main_sosiki/joho_tsusin/top/tel_number/shigai_list.html)のPDFファイルをいい感じにパースするもの
 
+## 使い方
+
+サーバーの起動
+
+```bash
+docker-compose build
+docker-compose up -d
+```
+
+PDFのパース(HTTPieを使った例)
+
+```
+http --form POST localhost:8080/parse pdf_file@~/Downloads/市外局番.pdf > result.json
+```
+
+出力例
+
+```bash
+cat out.json | jq | head -n20
+[
+  {
+    "番号区画コード": "1",
+    "番号区画": [
+      {
+        "name": "北海道江別市"
+      },
+      {
+        "name": "北海道札幌市"
+      },
+      {
+        "name": "北海道北広島市"
+      },
+      {
+        "name": "北海道空知郡南幌町"
+      }
+    ],
+    "市外局番": "11",
+    "市内局番": "CDE"
+  },
+```
+
+`~/Downloads/市外局番.pdf` は適宜置き換えてください。
+
 ## 機能
 
 - 日本語で記述された番号区画コードをJSON形式に変換する
